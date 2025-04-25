@@ -1,0 +1,164 @@
+@startuml
+skinparam class {
+    BackgroundColor White
+    ArrowColor #0078d7
+    BorderColor #2b2b2b
+}
+
+'##############################
+' Основные сущности
+'##############################
+
+class Player {
+    - name: string
+    - endurance: int
+    - dexterity: int
+    - speed: int
+    - accuracy: int
+    + getName(): string
+    + getEndurance(): int
+    + getDexterity(): int
+    + getSpeed(): int
+    + getAccuracy(): int
+}
+
+class Coach {
+    - name: string
+    - strategy: string
+    - strategyPower: int
+    + getName(): string
+    + getStrategy(): string
+    + getStrategyPower(): int
+}
+
+class Team {
+    - coach: Coach
+    - players: vector<Player>
+    - powerAttack: int
+    - powerDefend: int
+    + getName(): string
+    + getPowerAttack(): int
+    + getPowerDefend(): int
+    + calculateStats(): void
+}
+
+'##############################
+' Турнирная система
+'##############################
+
+class Tournament {
+    - teams: vector<unique_ptr<Team>>
+    - grid: TournamentGrid
+    + registerTeam(unique_ptr<Team>): void
+    + runTournament(): void
+    + teamCount(): int
+}
+
+class Match {
+    - team1: Team
+    - team2: Team
+    - judge: Judge
+    + getResult(): bool
+}
+
+class Judge {
+    + determineWinner(Team, Team): bool
+}
+
+class TournamentGrid {
+    - matches: vector<Match>
+    - teams: vector<Team>
+    + updateGrid(): void
+}
+
+'##############################
+' UI компоненты
+'##############################
+
+class TeamUI {
+    + displayStats(Team): void
+    + showPlayerStats(Player): void
+}
+
+class MatchUI {
+    + showScoreboard(Team, Team): void
+    + showProgress(int, int, int): void
+}
+
+class InputUI {
+    + readString(string): string
+    + readInt(string, int, int): int
+    + createPlayer(): Player
+    + createCoach(): Coach
+}
+
+'##############################
+' Паттерны проектирования
+'##############################
+
+class PlayerBuilder {
+    - player: Player
+    + setName(string): PlayerBuilder&
+    + setEndurance(int): PlayerBuilder&
+    + setDexterity(int): PlayerBuilder&
+    + setSpeed(int): PlayerBuilder&
+    + setAccuracy(int): PlayerBuilder&
+    + build(): Player
+}
+
+interface TeamFactory {
+    + createTeam(string, Coach, vector<Player>): unique_ptr<Team>
+}
+
+class VolleyballTeamFactory {
+    + createTeam(string, Coach, vector<Player>): unique_ptr<Team>
+}
+
+'##############################
+' Дополнительные компоненты
+'##############################
+
+class Observable<T> {
+    - observers: vector<function<void(const T&)>>
+    + subscribe(function<void(const T&)>): void
+    + notify(const T&): void
+}
+
+class MatchEvent {
+    <<enumeration>>
+    MATCH_START
+    POINT_SCORED
+    MATCH_END
+    - type: Type
+    - team: Team*
+}
+
+'##############################
+' Связи между классами
+'##############################
+
+Player "1..12" *-- "1" Team
+Coach "1" *-- "1" Team
+
+Tournament "1" *-- "1" TournamentGrid
+Tournament "1" *-- "2..*" Team
+
+TournamentGrid "1" *-- "*" Match
+Match "1" *-- "2" Team
+Match "1" *-- "1" Judge
+
+PlayerBuilder ..> Player : Создает
+VolleyballTeamFactory ..|> TeamFactory
+VolleyballTeamFactory ..> Team : Создает
+
+TeamUI ..> Team : Отображает
+TeamUI ..> Player : Отображает
+MatchUI ..> Match : Отображает
+MatchUI ..> Team : Отображает
+
+InputUI ..> Player : Создает
+InputUI ..> Coach : Создает
+
+Observable "1" *-- "1" Tournament
+Observable "1" *-- "*" MatchEvent
+@enduml
