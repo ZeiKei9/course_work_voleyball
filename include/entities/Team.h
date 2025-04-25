@@ -20,6 +20,8 @@ public:
          std::vector<Player> players,
          int powerAttack, int powerDefend);
 
+    virtual ~Team() = default;
+
     static std::unique_ptr<Team> createTeam(TeamFactory& factory,
                                           const std::string& name,
                                           const Coach& coach,
