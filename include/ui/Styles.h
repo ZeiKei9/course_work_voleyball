@@ -10,5 +10,5 @@
 #define DEFENSE_ICON "🛡️ "
 #define ERROR_ICON "❗ "
 
-#define BORDER_TOP "╔════════════════════════════════════╗\n"
-#define BORDER_BOTTOM "╚════════════════════════════════════╝\n"
+#define BORDER_TOP "╔══════════════════════════════════════════╗\n"
+#define BORDER_BOTTOM "╚══════════════════════════════════════════╝\n"

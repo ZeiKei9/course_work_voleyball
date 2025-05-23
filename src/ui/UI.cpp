@@ -64,17 +64,17 @@ void MatchUI::show_match_progress(int set, int score1, int score2) {
 
 void TeamUI::display_stats(const Team& team) {
     std::cout << BORDER_TOP
-              << "║       СТАТИСТИКА КОМАНДЫ     ║\n"
-              << "╠══════════════════════════════╣\n"
+              << "║            СТАТИСТИКА КОМАНДЫ            ║\n"
+              << "╠══════════════════════════════════════════╣\n"
               << "║ " << TEAM_ICON << "Название: " 
-              << std::left << std::setw(20) << team.getName() << " ║\n"
+              << std::left << std::setw(20) << team.getName() << "        ║\n"
               << "║ " << COACH_ICON << "Тренер: " 
-              << std::setw(21) << team.getCoach().getName() << " ║\n"
-              << "╠══════════════════════════════╣\n"
+              << std::setw(21) << team.getCoach().getName() << "         ║\n"
+              << "╠══════════════════════════════════════════╣\n"
               << "║ " << ATTACK_ICON << "Сила атаки: " 
-              << std::setw(16) << team.getPowerAttack() << " ║\n"
+              << std::setw(16) << team.getPowerAttack() << "           ║\n"
               << "║ " << DEFENSE_ICON << "Сила защиты: " 
-              << std::setw(15) << team.getPowerDefend() << " ║\n"
+              << std::setw(15) << team.getPowerDefend() << "           ║\n"
               << BORDER_BOTTOM << "\n";
 }
 

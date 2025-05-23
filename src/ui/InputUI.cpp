@@ -41,7 +41,7 @@ Player InputUI::create_player_interactive() {
 
 Coach InputUI::create_coach_interactive() {
     std::cout << "\n" << BORDER_TOP
-              << "║ 👔 СОЗДАНИЕ ТРЕНЕРА      ║\n"
+              << "║ 👔 СОЗДАНИЕ ТРЕНЕРА                      ║\n"
               << BORDER_BOTTOM;
     
     std::string name = read_string("Введите имя тренера");
@@ -54,7 +54,7 @@ Coach InputUI::create_coach_interactive() {
 std::vector<Player> InputUI::create_players_for_team() {
     std::vector<Player> players;
     std::cout << "\n" << BORDER_TOP
-              << "║ 🏐 СОЗДАНИЕ КОМАНДЫ      ║\n"
+              << "║ 🏐 СОЗДАНИЕ КОМАНДЫ                      ║\n"
               << BORDER_BOTTOM;
     
     int count = read_int("Введите количество игроков в команде", 2, 12);
