@@ -26,7 +26,7 @@ int InputUI::read_int(const std::string& prompt, int min, int max) {
 
 Player InputUI::create_player_interactive() {
     std::cout << "\n" << BORDER_TOP
-              << "║ 🧑🦰 СОЗДАНИЕ НОВОГО ИГРОКА ║\n"
+              << "║ 🧑🦰 СОЗДАНИЕ НОВОГО ИГРОКА              ║\n"
               << BORDER_BOTTOM;
     
     std::string name = read_string("Введите имя игрока");
